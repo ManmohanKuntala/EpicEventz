@@ -11,6 +11,16 @@ Managing events often involves disconnected systems for registrations, ticket sa
 EpicEventz addresses these challenges by bringing important event management operations together on the Salesforce platform.
 
 The project demonstrates how Salesforce CRM capabilities, automation, and custom development can be combined to create an integrated event management solution.
+## 📸 Application Screenshots
+
+### 🏠 Homepage
+![EpicEventz Homepage](screenshots/homepage.png)
+
+### 🎟️ Attendee Page
+![EpicEventz Attendee Page](screenshots/attendeepage.png)
+
+### 📊 Organizer Dashboard
+![EpicEventz Organizer Page](screenshots/organizerpage.png)
 
 ## ✨ Key Features
 
