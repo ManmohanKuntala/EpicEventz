@@ -1,58 +1,204 @@
-# Salesforce DX Project
+# 🎟️ EpicEventz – Salesforce Event Management Platform
 
-Salesforce DX is a development approach that brings source-driven development, team collaboration, and continuous integration to the Salesforce Platform. Instead of working directly in an org through a web browser, you work with metadata as source files in a local DX project, track changes in version control, and deploy through automated processes.
+A Salesforce-based event management platform designed to simplify event discovery, ticket booking, payment tracking, attendee management, and event operations through a unified experience.
 
-This project template gets you started with the tools and structure you need to build Salesforce applications using source control, scratch orgs, and the Salesforce CLI.
+EpicEventz connects event organizers and attendees using Salesforce Experience Cloud, Lightning Web Components (LWC), Apex, and Salesforce Flows.
 
-## Prerequisites
+## 🚀 Project Overview
 
-Before you start, make sure you have:
+Managing events often involves disconnected systems for registrations, ticket sales, payments, attendee verification, and feedback.
 
-- **Salesforce CLI** - Download from [developer.salesforce.com/tools/salesforcecli](https://developer.salesforce.com/tools/salesforcecli). See [Install Salesforce CLI](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_install_cli.htm) for details.
-- **VS Code with Salesforce Extension Pack** - See [Installation Instructions](https://developer.salesforce.com/docs/platform/sfvscode-extensions/guide/install.html) for details. Includes the Agentforce Vibes extension.
-- **A development org** - Sign up for a free Developer Edition org [here](https://developer.salesforce.com/signup).
-- **Dev Hub enabled** (optional, required to create scratch orgs) - You can enable Dev Hub in your development org under Setup > Dev Hub.  See [Provide Developers Access to Salesforce DX Tools](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_setup_dx_tools.htm).
+EpicEventz addresses these challenges by bringing important event management operations together on the Salesforce platform.
 
-## Project Structure
+The project demonstrates how Salesforce CRM capabilities, automation, and custom development can be combined to create an integrated event management solution.
 
-Your DX project follows this structure:
+## ✨ Key Features
 
-- **`force-app/main/default/`** - Your metadata source files live in this default package directory. You can configure additional package directories in the `sfdx-project.json` file.
-- **`config/`** - Scratch org definitions and project settings
-- **`scripts/`** - Automation scripts for common tasks
-- **`sfdx-project.json`** - Project manifest that defines package directories, namespace, API version, and other project-level settings
+### 1. Event Discovery
+- Browse available events through a custom Lightning Web Component.
+- View event information and available ticket options.
+- Display event listings through the Experience Cloud interface.
 
-See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm).
+### 2. Ticket Booking
+- Select an event and ticket type.
+- Enter attendee information.
+- Create and manage attendee ticket records.
+- Generate ticket confirmation details.
 
-## Get Started
+### 3. Simulated Payment Management
+- Record payment information associated with tickets.
+- Demonstrate payment success and status tracking.
+- Support simulated payment methods for project demonstration.
 
-Ready to start developing? The [Get Started with Salesforce DX](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_get_started_dx.htm) guide walks you through your first project, from creating a scratch org to creating a simple Apex class or LWC to deploying your code to a sandbox.
+**Note:** This project uses simulated payments. It does not process real financial transactions or connect to a live payment gateway.
 
-## Common Salesforce CLI Commands
+### 4. Ticket Management and QR Verification
+- Manage existing bookings and tickets.
+- Support ticket cancellation.
+- Generate QR-based ticket verification information.
+- Validate ticket codes during entry verification.
+- Prevent duplicate check-ins by recognizing tickets that have already been checked in.
 
-Here are common CLI commands that you'll use the most:
+### 5. Organizer Management
+- Provide organizer-facing event management components.
+- Track ticket sales and event-related information.
+- Support event financial tracking through payment and expense records.
 
-- `sf org login web`: Authorize an org
-- `sf org open`: Open your org in a browser
-- `sf org create scratch`: Create a scratch org
-- `sf project deploy start`: Deploy metadata to your org
-- `sf project retrieve start`: Retrieve metadata from your org
-- `sf template generate <artifact>`: Scaffold new components, such as Apex classes and triggers, LWC components, Lightning apps, and more
-- `sf apex <command>`: Run Apex tests, run anonymous Apex blocks, and view logs
-- `sf data <command>`: Work with test data
-- `sf alias <command>`: Manage org aliases
-- `sf config <command>`: Configure CLI settings
+### 6. Feedback and Support Automation
+- Collect attendee feedback and ratings.
+- Categorize feedback based on sentiment.
+- Automatically create high-priority support cases for negative feedback.
 
-## Use Agentforce Vibes to Build Lightning Apps
+### 7. Reports and Analytics
+- Track event performance and ticket sales.
+- Monitor payment and expense information.
+- Analyze attendee feedback through Salesforce reports.
 
-Transform your ideas into custom Lightning apps that extend CRM workflows directly in Lightning Experience. Through natural conversations with Agentforce Vibes, implement custom objects and fields, complex business logic, and dynamic UI components. See [Build a Lightning App Using Agentforce Vibes](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/lexapp-overview.html).
+## 🏗️ Technology Stack
 
-## Additional Resources
+| Technology | Purpose |
+|---|---|
+| Salesforce Platform | Application backend and CRM |
+| Salesforce Experience Cloud | User-facing event experience |
+| Lightning Web Components | Custom user interfaces |
+| Apex | Server-side business logic |
+| Salesforce Flows | Workflow automation |
+| SOQL | Salesforce data retrieval |
+| Salesforce Custom Objects | Structured event and ticket data |
+| VS Code | Development environment |
+| Salesforce CLI | Deployment and metadata management |
+| Git and GitHub | Version control |
 
-- [Agentforce Vibes Developer Guide](https://developer.salesforce.com/docs/platform/einstein-for-devs/guide/einstein-overview.html)
-- [Salesforce CLI Installation Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/)
-- [Salesforce CLI Plugin Development Guide](https://developer.salesforce.com/docs/platform/salesforce-cli-plugin/guide/conceptual-overview.html)
-- [Salesforce VS Code Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
+## 🗂️ Salesforce Data Model
 
+The project includes the following custom objects:
+
+| Object | Purpose |
+|---|---|
+| Event | Stores event details and performance information |
+| Ticket | Stores attendee ticket and booking information |
+| Ticket Type | Defines ticket categories, pricing, and quantities |
+| Payment | Tracks payment records and statuses |
+| Venue | Stores event venue information |
+| Expense | Tracks event-related expenses |
+| Feedback | Stores attendee ratings and comments |
+
+## ⚙️ Project Architecture
+
+EpicEventz uses Salesforce as its central application platform.
+
+**Frontend**
+- Salesforce Experience Cloud
+- Lightning Web Components
+
+**Business Logic**
+- Apex controllers and services
+- Salesforce Screen Flows
+- Record-triggered automation
+
+**Data Layer**
+- Salesforce custom objects
+- Custom fields and relationships
+- SOQL queries
+
+**Workflow**
+
+Event Discovery → Ticket Selection → Attendee Registration → Ticket Creation → Simulated Payment → Booking Confirmation → Ticket Verification → Feedback Collection
+
+## 📁 Project Structure
+
+```text
+EpicEventz/
+│
+├── config/
+│   └── project-scratch-def.json
+│
+├── force-app/
+│   └── main/
+│       └── default/
+│           ├── classes/
+│           ├── flows/
+│           ├── lwc/
+│           └── objects/
+│
+├── manifest/
+│   └── package.xml
+│
+├── scripts/
+│   ├── apex/
+│   └── soql/
+│
+├── .forceignore
+├── .gitignore
+├── package.json
+├── sfdx-project.json
+└── README.md
+```
+
+## 🛠️ Setup and Installation
+
+### Prerequisites
+
+- A Salesforce Developer Edition org.
+- Salesforce CLI.
+- Visual Studio Code.
+- Salesforce Extension Pack.
+- Git.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/ManmohanKuntala/EpicEventz.git
+```
+
+### 2. Navigate to the project
+
+```bash
+cd EpicEventz
+```
+
+### 3. Authorize your Salesforce org
+
+```bash
+sf org login web --alias EpicEventzOrg
+```
+
+### 4. Set your target org
+
+```bash
+sf config set target-org=EpicEventzOrg
+```
+
+### 5. Deploy project metadata
+
+```bash
+sf project deploy start
+```
+
+After deployment, complete any required Salesforce org configuration, Experience Cloud site setup, permissions, and activation steps before testing the application.
+
+## 🔒 Important Notes
+
+- Payment functionality is simulated for demonstration purposes.
+- A Salesforce development org is required to run the application.
+- Access to application features depends on the configured Salesforce permissions and Experience Cloud settings.
+- Deployment may require additional org-specific configuration.
+
+## 🎯 Project Objective
+
+The objective of EpicEventz is to demonstrate practical Salesforce development skills by combining CRM data management, custom user interfaces, Apex programming, and workflow automation into a unified event management application.
+
+## 👨‍💻 Developer
+
+**Manmohan Kuntala**
+
+B.Tech – Computer Science and Engineering (Data Science)
+
+Vidya Jyothi Institute of Technology
+
+- GitHub: [ManmohanKuntala](https://github.com/ManmohanKuntala)
+- Project Repository: [EpicEventz](https://github.com/ManmohanKuntala/EpicEventz)
+
+---
+
+⭐ If you find this project interesting, feel free to explore the repository and its implementation.
