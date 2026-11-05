@@ -1,0 +1,54 @@
+
+<template>
+    <lightning-card title="My Tickets" icon-name="standard:ticket">
+        <div class="slds-p-around_medium">
+            <p class="slds-m-bottom_medium">
+                Enter your booking email to view your tickets.
+            </p>
+
+            <lightning-input
+                type="email"
+                label="Booking Email"
+                value={attendeeEmail}
+                onchange={handleEmailChange}
+                required>
+            </lightning-input>
+
+            <lightning-button
+                class="slds-m-top_medium"
+                label="Find My Tickets"
+                variant="brand"
+                onclick={handleFindTickets}
+                disabled={isLoading}>
+            </lightning-button>
+
+            <template lwc:if={isLoading}>
+                <lightning-spinner
+                    alternative-text="Loading tickets">
+                </lightning-spinner>
+            </template>
+
+            <template lwc:if={errorMessage}>
+                <div class="slds-text-color_error slds-m-top_medium">
+                    {errorMessage}
+                </div>
+            </template>
+
+            <template lwc:if={tickets.length}>
+                <div class="slds-m-top_large">
+                    <template for:each={tickets} for:item="ticket">
+                        <article
+                            key={ticket.Id}
+                            class="slds-box slds-m-bottom_small">
+                            <p><strong>Ticket:</strong> {ticket.Ticket_Code__c}</p>
+                            <p><strong>Event:</strong> {ticket.Event__r.Name}</p>
+                            <p><strong>Type:</strong> {ticket.Ticket_Type__r.Name}</p>
+                            <p><strong>Status:</strong> {ticket.Status__c}</p>
+                            <p><strong>Price:</strong> ₹{ticket.Price_Paid__c}</p>
+                        </article>
+                    </template>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

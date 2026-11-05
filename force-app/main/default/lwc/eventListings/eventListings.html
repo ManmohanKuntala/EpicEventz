@@ -1,0 +1,258 @@
+
+<template>
+    <section class="events-page">
+
+        <!-- Event Discovery -->
+        <div class="events-section" id="events-list">
+            <div class="section-heading">
+                <div>
+                    <span class="eyebrow">FIND YOUR NEXT ADVENTURE</span>
+                    <h2>Explore Events</h2>
+                    <p class="section-subtitle">
+                        From inspiring ideas to unforgettable experiences.
+                    </p>
+                </div>
+
+                <div class="events-badge">
+                    <span class="status-dot"></span>
+                    Discover what's happening
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <template lwc:if={isLoading}>
+                <div class="message-panel">
+                    <lightning-spinner
+                        alternative-text="Loading events"
+                        size="medium">
+                    </lightning-spinner>
+                    <p>Finding amazing experiences for you...</p>
+                </div>
+            </template>
+
+            <!-- Error -->
+            <template lwc:if={hasError}>
+                <div class="message-panel error-panel">
+                    <span class="message-icon">!</span>
+                    <h3>We couldn't load the events</h3>
+                    <p>Please refresh the page and try again.</p>
+                </div>
+            </template>
+
+            <!-- Event Cards -->
+            <template lwc:if={hasEvents}>
+                <div class="event-grid">
+                    <template for:each={events} for:item="event">
+                        <article key={event.Id} class="event-card">
+
+                            <!-- Card Banner -->
+                            <div class="event-card-banner">
+                                <span class="event-art" aria-hidden="true">✦</span>
+
+                                <div class="banner-labels">
+                                    <span class="category-pill">
+                                        {event.eventCategory}
+                                    </span>
+                                    <span class="event-number">EPIC EVENT</span>
+                                </div>
+                            </div>
+
+                            <!-- Card Content -->
+                            <div class="event-card-content">
+                                <h3>{event.Name}</h3>
+
+                                <p class="event-description">
+                                    {event.eventDescription}
+                                </p>
+
+                                <!-- Rating and Event Health -->
+                                <div class="event-metrics">
+
+                                    <div class="metric-item">
+                                        <span class="metric-label">
+                                            ATTENDEE RATING
+                                        </span>
+
+                                        <template lwc:if={event.hasRating}>
+                                            <p class="metric-value rating-value">
+                                                <span aria-hidden="true">★</span>
+                                                {event.formattedRating}<span class="metric-suffix">/5</span>
+                                            </p>
+                                        </template>
+
+                                        <template lwc:else>
+                                            <p class="metric-empty">
+                                                Not rated yet
+                                            </p>
+                                        </template>
+                                    </div>
+
+                                    <div class="metric-item">
+                                        <span class="metric-label">
+                                            EVENT HEALTH
+                                        </span>
+
+                                        <template lwc:if={event.hasHealthScore}>
+                                            <p class="metric-value">
+                                                {event.formattedHealthScore}<span class="metric-suffix">/100</span>
+                                            </p>
+                                        </template>
+
+                                        <template lwc:else>
+                                            <p class="metric-empty">
+                                                Not available
+                                            </p>
+                                        </template>
+
+                                        <p class="health-status">
+                                            {event.healthStatus}
+                                        </p>
+                                    </div>
+
+                                </div>
+
+                                <!-- Event Details -->
+                                <div class="event-details">
+
+                                    <div class="detail-row">
+                                        <span class="detail-icon" aria-hidden="true">◷</span>
+                                        <div>
+                                            <span class="detail-label">STARTS</span>
+                                            <p>
+                                                <template lwc:if={event.Start_Date__c}>
+                                                    <lightning-formatted-date-time
+                                                        value={event.Start_Date__c}
+                                                        year="numeric"
+                                                        month="short"
+                                                        day="2-digit"
+                                                        hour="2-digit"
+                                                        minute="2-digit">
+                                                    </lightning-formatted-date-time>
+                                                </template>
+
+                                                <template lwc:else>
+                                                    Date to be announced
+                                                </template>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="detail-row">
+                                        <span class="detail-icon" aria-hidden="true">⌖</span>
+                                        <div>
+                                            <span class="detail-label">LOCATION</span>
+                                            <p>{event.venueName}</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Ticket Availability -->
+                                <template lwc:if={event.hasAvailableTickets}>
+                                    <div class="availability available">
+                                        <span class="status-dot"></span>
+                                        {event.ticketsRemaining} tickets remaining
+                                    </div>
+                                </template>
+
+                                <template lwc:if={event.isSoldOut}>
+                                    <div class="availability sold-out">
+                                        Tickets currently sold out
+                                    </div>
+                                </template>
+
+                                <!-- Booking Action -->
+                                <div class="card-footer">
+                                    <span class="footer-label">
+                                        Your next memory awaits
+                                    </span>
+
+                                    <!-- Book Tickets -->
+                                    <template lwc:if={event.hasAvailableTickets}>
+                                        <lightning-button
+                                            label="Book Tickets"
+                                            variant="brand"
+                                            icon-name="utility:ticket"
+                                            icon-position="left"
+                                            data-event-id={event.Id}
+                                            onclick={handleBookTickets}>
+                                        </lightning-button>
+                                    </template>
+
+                                    <!-- Join Waitlist -->
+                                    <template lwc:if={event.isSoldOut}>
+                                        <lightning-button
+                                            label="Join Waitlist"
+                                            variant="brand"
+                                            icon-name="utility:clock"
+                                            icon-position="left"
+                                            data-event-id={event.Id}
+                                            onclick={handleBookTickets}>
+                                        </lightning-button>
+                                    </template>
+
+                                </div>
+
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </template>
+
+            <!-- Empty State -->
+            <template lwc:if={hasNoEvents}>
+                <div class="message-panel">
+                    <span class="message-icon">✦</span>
+                    <h3>Something exciting is coming</h3>
+                    <p>
+                        No published events are available right now.
+                        Please check back soon.
+                    </p>
+                </div>
+            </template>
+        </div>
+
+        <!-- Booking Flow -->
+        <template lwc:if={showBookingFlow}>
+            <section class="booking-section" id="booking-panel">
+                <div class="booking-heading">
+                    <span class="eyebrow">YOU'RE ONE STEP AWAY</span>
+                    <h2>Make it happen.</h2>
+                    <p>
+                        Complete your booking through EpicEventz.
+                    </p>
+                </div>
+
+                <div class="booking-flow-container">
+                    <div class="booking-toolbar">
+                        <span class="booking-status">
+                            <span class="status-dot"></span>
+                            Booking form
+                        </span>
+
+                        <lightning-button
+                            label="Close"
+                            onclick={handleCloseBooking}
+                            variant="neutral">
+                        </lightning-button>
+                    </div>
+
+                    <lightning-flow
+                        flow-api-name="EpicEventz_Booking_Flow"
+                        flow-input-variables={flowInputVariables}
+                        onstatuschange={handleFlowStatusChange}>
+                    </lightning-flow>
+                </div>
+            </section>
+        </template>
+
+        <!-- Footer -->
+        <footer class="events-footer">
+            <div class="footer-brand">
+                Epic<span>Eventz</span>
+            </div>
+            <p>Discover. Connect. Experience something epic.</p>
+        </footer>
+
+    </section>
+</template>
